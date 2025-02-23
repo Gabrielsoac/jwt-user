@@ -1,0 +1,21 @@
+{
+  "name": "jwt-user",
+  "version": "1.0.0",
+  "description": "repository for to learn authentication and authorization with JWT and nodeJS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "tsx ./src/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gabrielsoac/jwt-user.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Gabrielsoac/jwt-user/issues"
+  },
+  "homepage": "https://github.com/Gabrielsoac/jwt-user#readme"
+}
