@@ -8,7 +8,6 @@ const password_DB = process.env.PASSWORD_DB;
 const URL = `mongodb://${user_DB}:${password_DB}@localhost:${port_DB}/users?authSource=admin`
 
 const connectDB = async () => {
-    console.log(URL);
     try {
         await mongoose.connect(URL);
         console.log('conectado ao db com sucesso');
