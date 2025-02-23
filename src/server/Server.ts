@@ -1,17 +1,8 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
+import { router } from '../routes/Router';
 
 const app = express();
 app.use(express.json());
-
-app.get(
-    '/',
-    (_: Request, res: Response) => {
-        res.json(
-            {
-                message: 'Welcome to my web server'
-            }
-        );
-    }
-)
+app.use(router);
 
 export { app };

@@ -4,8 +4,6 @@ type TUserSchema = {
     name: string,
     email: string,
     password: string
-
-
 }
 
 const userSchema = new Schema<TUserSchema>(
