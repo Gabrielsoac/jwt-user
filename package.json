@@ -1,46 +1,45 @@
 {
-  "name": "jwt-user",
-  "version": "1.0.0",
-  "description": "repository for to learn authentication and authorization with JWT and nodeJS",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "tsx ./src/index.ts",
-    "watch": "nodemon --watch 'src'/ --exec 'tsx src/index.ts' -e ts"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Gabrielsoac/jwt-user.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Gabrielsoac/jwt-user/issues"
-  },
-  "homepage": "https://github.com/Gabrielsoac/jwt-user#readme",
-  "devDependencies": {
-    "@eslint/js": "^9.21.0",
-    "@types/jsonwebtoken": "^9.0.9",
-    "@types/mongoose": "^5.11.97",
-    "@types/node": "^22.13.5",
-    "@types/nodemon": "^1.19.6",
-    "eslint": "^9.21.0",
-    "globals": "^16.0.0",
-    "nodemon": "^3.1.9",
-    "tsx": "^4.19.3",
-    "typescript": "^5.7.3",
-    "typescript-eslint": "^8.24.1"
-  },
   "dependencies": {
+    "@types/eslint": "^9.6.1",
     "@types/express": "^5.0.0",
-    "bcrypt-ts": "^6.0.0",
+    "@types/jsonwebtoken": "^9.0.8",
+    "@types/mongoose": "^5.11.97",
+    "bcryptjs": "^3.0.0",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "http-status-codes": "^2.3.0",
     "inquirer": "^12.4.2",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.10.1",
-    "yup": "^1.6.1"
-  }
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3"
+  },
+  "scripts": {
+    "dev": "tsx src/index.ts",
+    "watch": "nodemon --watch 'src'/ --exec 'tsx src/index.ts' -e ts"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.20.0",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/nodemon": "^1.19.6",
+    "eslint": "^9.20.1",
+    "globals": "^15.15.0",
+    "nodemon": "^3.1.9",
+    "typescript-eslint": "^8.24.0"
+  },
+  "name": "api-user-authentitation",
+  "description": "API dedicated for Learning Authentication and Authorization with JWT, using Typescript, ExpressJS and Mongoose",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gabrielsoac/api-user-authentication.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Gabrielsoac/api-user-authentication/issues"
+  },
+  "homepage": "https://github.com/Gabrielsoac/api-user-authentication#readme"
 }
