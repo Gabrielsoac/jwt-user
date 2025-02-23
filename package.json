@@ -17,5 +17,10 @@
   "bugs": {
     "url": "https://github.com/Gabrielsoac/jwt-user/issues"
   },
-  "homepage": "https://github.com/Gabrielsoac/jwt-user#readme"
+  "homepage": "https://github.com/Gabrielsoac/jwt-user#readme",
+  "devDependencies": {
+    "eslint": "^9.21.0",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.24.1"
+  }
 }
