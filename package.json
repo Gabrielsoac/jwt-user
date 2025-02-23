@@ -20,6 +20,7 @@
   "homepage": "https://github.com/Gabrielsoac/jwt-user#readme",
   "devDependencies": {
     "@eslint/js": "^9.21.0",
+    "@types/jsonwebtoken": "^9.0.9",
     "@types/node": "^22.13.5",
     "eslint": "^9.21.0",
     "globals": "^16.0.0",
@@ -29,10 +30,12 @@
   },
   "dependencies": {
     "@types/express": "^5.0.0",
+    "bcrypt-ts": "^6.0.0",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "http-status-codes": "^2.3.0",
     "inquirer": "^12.4.2",
+    "jsonwebtoken": "^9.0.2",
     "yup": "^1.6.1"
   }
 }
