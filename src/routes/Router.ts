@@ -2,6 +2,7 @@ import { Request, Response, Router } from "express";
 import { UserController } from "../controllers/UserController";
 import { MongoDbRepository } from "../repositories/MongoDbRepository";
 import { UserService } from "../service/UserService";
+import { auth } from "../middleware/Authentication";
 
 const router = Router();
 
@@ -20,14 +21,20 @@ router.get(
     }
 )
 
+router.get(
+    '/user/:id',
+    auth,
+    userController.getUser.bind(userController)
+);
+
 router.post(
     '/auth/register',
     userController.register.bind(userController)
-)
+);
 
 router.post(
     '/auth/login',
     userController.login.bind(userController)
-)
+);
 
 export { router }
