@@ -36,14 +36,16 @@ export class UserController {
         );
     } 
 
-    public async login(req: Request<{}, {}, TLoginData>, res: Response){
+    public async login(req: Request<{}, {}, TLoginData>, res: Response<TLoginSucess | TError >){
 
         try {
-            await this.userService.login(req.body);
+            const token = await this.userService.login(req.body);
 
             res.status(StatusCodes.OK).json(
                 {
                     message: 'login sucess',
+                    token
+
                 }
             );
             
@@ -62,4 +64,13 @@ export type TRegisterUserRequestDto = {
     email: string,
     password: string,
     confirmpassword: string
+}
+
+type TLoginSucess = {
+    message: string,
+    token: string;
+}
+
+type TError = {
+    message: string
 }

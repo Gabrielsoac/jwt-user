@@ -1,3 +1,4 @@
+import jwt from 'jsonwebtoken';
 import { TRegisterUserRequestDto } from "../controllers/UserController";
 import { MongoDbRepository } from "../repositories/MongoDbRepository";
 import bcrypt from 'bcrypt';
@@ -48,7 +49,7 @@ export class UserService {
         }
     }
 
-    public async login(loginData: TLoginData): Promise<void> {
+    public async login(loginData: TLoginData): Promise<string> {
 
         try {
             const user = await this.mongodbRepository.getUserByEmail(loginData.email);
@@ -62,10 +63,24 @@ export class UserService {
             if(!comparePassword){
                 throw new Error('Invalid Password');
             }
+
+            if(!process.env.SECRET){
+                throw new Error('Secret key not defined');
+            } 
+            const secret: string = process.env.SECRET;
+
+            const token = jwt.sign(
+                {
+                    id: user._id,
+                },
+                secret,
+            )
+
+            return token;
         }
         catch(err){
             throw new Error((err as Error).message);
-        } 
+        }
     }
 }
 
