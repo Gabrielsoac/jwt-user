@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import { TRegisterUserRequestDto } from "../controllers/UserController";
-import { MongoDbRepository } from "../repositories/MongoDbRepository";
+import { MongoDbRepository, TUserPersisted } from "../repositories/MongoDbRepository";
 import bcrypt from 'bcrypt';
 
 export class UserService {
@@ -20,7 +20,7 @@ export class UserService {
         return UserService.instance;
     }
 
-    public async register(userData: TRegisterUserRequestDto): Promise<TUserPersisted> {
+    public async register(userData: TRegisterUserRequestDto): Promise<TUserResponseDTO> {
 
         const userExists = await this.mongodbRepository.getUserByEmail(userData.email);
 
@@ -44,6 +44,7 @@ export class UserService {
         );
 
         return {
+            id: user.id,
             name: user.name,
             email: user.email
         }
@@ -71,7 +72,7 @@ export class UserService {
 
             const token = jwt.sign(
                 {
-                    id: user._id,
+                    id: user.id,
                 },
                 secret,
             )
@@ -82,6 +83,28 @@ export class UserService {
             throw new Error((err as Error).message);
         }
     }
+
+    public async getUserById(id: string): Promise<TUserResponseDTO> {
+        
+        try {
+
+            const user: TUserPersisted | null = await this.mongodbRepository.findUserById(id);
+
+            if(user){
+                return {
+                    id: user.id,
+                    name: user.name,
+                    email: user.email,
+                }
+            }
+            throw new Error(`Usuário com o ID ${id} não encontrado`)
+        } 
+        catch(err){
+            throw new Error((err as Error).message);
+        }
+
+    }
+
 }
 
 export type TUserData = {
@@ -90,7 +113,8 @@ export type TUserData = {
     password: string
 }
 
-export type TUserPersisted = {
+export type TUserResponseDTO = {
+    id: string
     name: string,
     email: string
 }

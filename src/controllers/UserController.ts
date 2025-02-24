@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-empty-object-type */
 import { Request, Response } from "express";
-import { TLoginData, UserService } from "../service/UserService";
+import { TLoginData, TUserResponseDTO, UserService } from "../service/UserService";
 import { StatusCodes } from "http-status-codes";
 
 export class UserController {
@@ -45,12 +45,28 @@ export class UserController {
                 {
                     message: 'login sucess',
                     token
-
                 }
             );
             
         } catch (err){
             res.status(StatusCodes.BAD_REQUEST).json(
+                {
+                    message: (err as Error).message,
+                }
+            )
+        }
+    }
+
+    public async getUser(req: Request<TRequestUser>, res: Response<TUserResponseDTO | TError>){
+        try {
+            const id: string = req.params.id;
+
+            const user = await this.userService.getUserById(id);
+
+            res.status(StatusCodes.OK).json({...user});
+        } 
+        catch(err){
+            res.status(StatusCodes.NOT_FOUND).json(
                 {
                     message: (err as Error).message,
                 }
@@ -73,4 +89,8 @@ type TLoginSucess = {
 
 type TError = {
     message: string
+}
+
+type TRequestUser = {
+    id: string
 }

@@ -16,7 +16,7 @@ export class MongoDbRepository {
         return MongoDbRepository.instance;
     }
 
-    public async getUserByEmail(email: string){
+    public async getUserByEmail(email: string): Promise<TUserPersisted | null >{
         try {
             const user = await UserModel.findOne(
                 {
@@ -24,15 +24,25 @@ export class MongoDbRepository {
                 }
             );
 
-            return user;
+            if(user){
+                return {
+                    id: user._id.toString(),
+                    name: user.name,
+                    email: user.email,
+                    password: user.password
+                };
+            }
+
+            return null;
         }
         catch(err){
             throw new Error((err as Error).message);
         }
     }
 
-    public async saveUser(data: TUserData): Promise<TUserData> {
-        const user = UserModel.create(
+    public async saveUser(data: TUserData): Promise<TUserPersisted> {
+        
+        const user = await UserModel.create(
             {
                 name: data.name,
                 email: data.email,
@@ -40,6 +50,39 @@ export class MongoDbRepository {
             }
         );
 
-        return user;
+        return {
+            id: user._id.toString(),
+            name: user.name,
+            email: user.email,
+            password: user.password
+        }
     }
+
+    public async findUserById(id: string): Promise<TUserPersisted | null> {
+        
+        try {
+            const user = await UserModel.findById(id);
+
+            if(!user){
+                return null;
+            }
+
+            return {
+                id: user._id.toString(),
+                name: user.name,
+                email: user.email,
+                password: user.password
+            }
+        }
+        catch(err){
+            throw new Error((err as Error).message);
+        }
+    }
+}
+
+export type TUserPersisted = {
+    id: string,
+    name: string
+    email: string,
+    password: string
 }
