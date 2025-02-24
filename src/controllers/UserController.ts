@@ -39,7 +39,7 @@ export class UserController {
     public async login(req: Request<{}, {}, TLoginData>, res: Response){
 
         try {
-            this.userService.login(req.body);
+            await this.userService.login(req.body);
 
             res.status(StatusCodes.OK).json(
                 {
@@ -54,7 +54,6 @@ export class UserController {
                 }
             )
         }
-
     }
 }
 
