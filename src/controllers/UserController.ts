@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-empty-object-type */
 import { Request, Response } from "express";
-import { UserService } from "../service/UserService";
+import { TLoginData, UserService } from "../service/UserService";
 import { StatusCodes } from "http-status-codes";
 
 export class UserController {
@@ -34,6 +35,27 @@ export class UserController {
             {...user}
         );
     } 
+
+    public async login(req: Request<{}, {}, TLoginData>, res: Response){
+
+        try {
+            this.userService.login(req.body);
+
+            res.status(StatusCodes.OK).json(
+                {
+                    message: 'login sucess',
+                }
+            );
+            
+        } catch (err){
+            res.status(StatusCodes.BAD_REQUEST).json(
+                {
+                    message: (err as Error).message,
+                }
+            )
+        }
+
+    }
 }
 
 export type TRegisterUserRequestDto = {

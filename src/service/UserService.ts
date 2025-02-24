@@ -47,6 +47,26 @@ export class UserService {
             email: user.email
         }
     }
+
+    public async login(loginData: TLoginData): Promise<void> {
+
+        try {
+            const user = await this.mongodbRepository.getUserByEmail(loginData.email);
+            
+            if(!user){
+                throw new Error('Usuário não encontrado');
+            }
+
+            const comparePassword = await bcrypt.compare(loginData.password, user.password);
+
+            if(!comparePassword){
+                throw new Error('Invalid Password');
+            }
+        }
+        catch(err){
+            throw new Error((err as Error).message);
+        } 
+    }
 }
 
 export type TUserData = {
@@ -58,4 +78,9 @@ export type TUserData = {
 export type TUserPersisted = {
     name: string,
     email: string
+}
+
+export type TLoginData = {
+    email: string,
+    password: string
 }

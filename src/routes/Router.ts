@@ -25,4 +25,9 @@ router.post(
     userController.register.bind(userController)
 )
 
+router.post(
+    '/auth/login',
+    userController.login.bind(userController)
+)
+
 export { router }
