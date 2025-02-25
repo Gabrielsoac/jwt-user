@@ -36,7 +36,7 @@ export class UserController {
         );
     } 
 
-    public async login(req: Request<{}, {}, TLoginData>, res: Response<TLoginSucess | TError >){
+    public async login(req: Request<{}, {}, TLoginData>, res: Response<TLoginSucess | TResponseError >){
 
         try {
             const token = await this.userService.login(req.body);
@@ -57,7 +57,8 @@ export class UserController {
         }
     }
 
-    public async getUser(req: Request<TRequestUser>, res: Response<TUserResponseDTO | TError>){
+    public async getUser(req: Request<TRequestUser>, res: Response<TUserResponseDTO | TResponseError>){
+
         try {
             const id: string = req.params.id;
 
@@ -87,7 +88,7 @@ type TLoginSucess = {
     token: string;
 }
 
-type TError = {
+type TResponseError = {
     message: string
 }
 
